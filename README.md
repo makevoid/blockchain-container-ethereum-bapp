@@ -1,4 +1,4 @@
-# blockchain-container-ethereum
+# blockchain-container-ethereum-bapp
 Base Bapp2 Blockchain Docker Container
 
 
