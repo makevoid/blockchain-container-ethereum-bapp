@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+
+# sample run-file for parity - use with pm2 ( example: `pn2 --interpreter bash ./parity_run` - chain commands so that pm2 starts before your app )
+
+
+
+# Proof of authority chain - ./config/chain_poa.json
+
+if [[ `uname` == 'Linux' ]]; then
+  # platform='linux'
+  DIR=`dirname $(readlink -f $0)`
+elif [[ `uname` == 'Darwin' ]]; then
+  # platform='osx'
+  DIR=`pwd`
+fi
+
+
+echo "DIR: $DIR"
+
+# config:
+
+# you need to create this account via `parity account new` - you have to make sure this accounts gets unlocked with the right password (./config/password)
+COINBASE=`$DIR/get_coinbase | xargs` # TODO: load from config
+
+echo "COINBASE: $COINBASE"
+
+
+# run the parity instance:
+#
+
+parity -l all --password $DIR/config/password   \
+       --unlock  $COINBASE --author $COINBASE   \
+       --chain   $DIR/config/chain_poa.json     \
+       --db-path $DIR/blockchain_data           \
+       --rpcaddr 0.0.0.0 --rpcport 8545         \
+       --jsonrpc-hosts="all"                    \
+       --jsonrpc-cors "http://localhost:3001"   \
+       --reseal-min-period 10                   \
+       --reserved-peers $DIR/peers.enodes       \
+       --no-discovery                           \
+       $*
