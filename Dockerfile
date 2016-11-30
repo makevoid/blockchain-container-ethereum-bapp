@@ -14,7 +14,17 @@ RUN apt-get update      -y --ignore-missing              && \
 
 # parity
 #
-RUN wget http://d1h4xl4cr1h0mo.cloudfront.net/v1.4.5/x86_64-unknown-linux-gnu/parity_1.4.5_amd64.deb && dpkg -i parity_1.4.5_amd64.deb
+#
+# parity 1.4.5
+# RUN wget http://d1h4xl4cr1h0mo.cloudfront.net/v1.4.5/x86_64-unknown-linux-gnu/parity_1.4.5_amd64.deb && dpkg -i parity_1.4.5_amd64.deb
+#
+# parity 1.3.8
+# RUN wget https://github.com/ethcore/parity/releases/download/v1.3.8/parity_1.3.8-0_amd64.deb && dpkg -i parity_1.3.8-0_amd64.deb
+#
+# parity 1.3.14 
+RUN wget http://d1h4xl4cr1h0mo.cloudfront.net/v1.3.14/x86_64-unknown-linux-gnu/parity_1.3.14_amd64.deb && dpkg -i parity_1.3.14_amd64.deb
+#
+
 
 
 RUN apt-get install -y python curl git unzip
